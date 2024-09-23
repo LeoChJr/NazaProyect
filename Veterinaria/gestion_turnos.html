@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Turnos</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Gestión de Turnos</h1>
+        <form id="turnosForm" class="needs-validation" novalidate>
+            <div class="form-group">
+                <label for="nombrePersona">Nombre de la Persona:</label>
+                <input type="text" class="form-control" id="nombrePersona" required>
+                <div class="invalid-feedback">Por favor, ingresa el nombre de la persona.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="nombrePerro">Nombre del Perro:</label>
+                <input type="text" class="form-control" id="nombrePerro" required>
+                <div class="invalid-feedback">Por favor, ingresa el nombre del perro.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="fechaConsulta">Fecha de la Consulta:</label>
+                <input type="date" class="form-control" id="fechaConsulta" required>
+                <div class="invalid-feedback">Por favor, selecciona la fecha de la consulta.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="cantidadMascotas">Cantidad de Mascotas (máx 6):</label>
+                <input type="number" class="form-control" id="cantidadMascotas" min="1" max="6" required>
+                <div class="invalid-feedback">Por favor, ingresa un número entre 1 y 6.</div>
+            </div>
+
+            <button type="button" class="btn btn-success btn-block" onclick="generarFormularioMascotas()">Agregar Mascotas</button>
+
+            <div id="formularios-mascotas" class="mt-4"></div>
+
+            <h2 class="mt-4">Mascotas registradas:</h2>
+            <div id="tarjetas-mascotas" class="row"></div>
+
+            <button type="submit" class="btn btn-primary btn-block mt-4">Guardar Turno</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyC13egxtMiC_611gyNexGAMScfc9YvX9Ow",
+            authDomain: "proyecto-905c6.firebaseapp.com",
+            projectId: "proyecto-905c6",
+            storageBucket: "proyecto-905c6.appspot.com",
+            messagingSenderId: "767681703235",
+            appId: "1:767681703235:web:228915f2dc7385bde9d3f6",
+            measurementId: "G-WVV154Z5KN"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Get a reference to the Firestore database service
+        const db = firebase.firestore();
+
+        // JavaScript para validar el formulario usando Bootstrap
+        (function () {
+            'use strict'
+            const forms = document.querySelectorAll('.needs-validation')
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })();
+
+        // JavaScript para manejar el formulario dinámico de mascotas
+        function generarFormularioMascotas() {
+    const cantidad = document.getElementById('cantidadMascotas').value;
+    const contenedor = document.getElementById('formularios-mascotas');
+    contenedor.innerHTML = ''; // Limpiar formularios previos
+
+    for (let i = 1; i <= cantidad; i++) {
+        const formHtml = `
+            <div class="form-group">
+                <h3>Mascota ${i}</h3>
+                <label>Nombre de la Mascota ${i}:</label>
+                <input type="text" class="form-control" id="nombre-mascota-${i}" required>
+                <label>Edad:</label>
+                <input type="number" class="form-control" id="edad-mascota-${i}" required>
+                <label>Tipo de Mascota:</label>
+                <input type="text" class="form-control" id="tipo-mascota-${i}" required>
+            </div>
+        `;
+        contenedor.innerHTML += formHtml;
+    }
+}
+
+
+        // Guardar los datos de las mascotas
+        document.getElementById('turnosForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevenir el envío por defecto
+
+            const cantidad = document.getElementById('cantidadMascotas').value;
+            const tarjetasContenedor = document.getElementById('tarjetas-mascotas');
+            tarjetasContenedor.innerHTML = ''; // Limpiar tarjetas previas
+
+            const mascotas = [];
+
+            for (let i = 1; i <= cantidad; i++) {
+                const nombre = document.getElementById(`nombre-mascota-${i}`).value;
+                const edad = document.getElementById(`edad-mascota-${i}`).value;
+                const tipo = document.getElementById(`tipo-mascota-${i}`).value;
+
+                mascotas.push({ nombre, edad, tipo });
+
+                const tarjetaHtml = `
+                    <div class="col-md-4">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Mascota ${i}</h5>
+                                <p><strong>Nombre:</strong> ${nombre}</p>
+                                <p><strong>Edad:</strong> ${edad} años</p>
+                                <p><strong>Tipo:</strong> ${tipo}</p>
+                                <button class="btn btn-primary" onclick="editarMascota(${i})">Editar</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                tarjetasContenedor.innerHTML += tarjetaHtml;
+            }
+
+            // Guardar en Firebase
+            guardarEnFirebase(mascotas);
+        });
+
+        // Función para guardar en Firebase
+        function guardarEnFirebase(mascotas) {
+    const nombrePersona = document.getElementById('nombrePersona').value;
+    const nombrePerro = document.getElementById('nombrePerro').value;
+    const fechaConsulta = document.getElementById('fechaConsulta').value;
+
+    db.collection("turnos").add({
+        nombrePersona: nombrePersona,
+        nombrePerro: nombrePerro,
+        fechaConsulta: fechaConsulta,
+        mascotas: mascotas
+    })
+    .then((docRef) => {
+        console.log("Document written with ID: ", docRef.id);
+        alert("Turno guardado exitosamente!");
+
+        // Agregar el ID del documento a cada tarjeta
+        mascotas.forEach((mascota, index) => {
+            generarTarjetaMascota(mascota, index + 1, docRef.id);
+        });
+    })
+    .catch((error) => {
+        console.error("Error adding document: ", error);
+        alert("Error al guardar el turno. Por favor, intenta de nuevo.");
+    });
+}
+
+
+function generarTarjetaMascota(mascota, index, docId) {
+    const tarjetaHtml = `
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Mascota ${index}</h5>
+                    <p><strong>Nombre:</strong> ${mascota.nombre}</p>
+                    <p><strong>Edad:</strong> ${mascota.edad} años</p>
+                    <p><strong>Tipo:</strong> ${mascota.tipo}</p>
+                    <button class="btn btn-primary" onclick="editarMascota(${index}, '${docId}')">Editar</button>
+                </div>
+            </div>
+        </div>
+    `;
+    document.getElementById('tarjetas-mascotas').innerHTML += tarjetaHtml;
+}
+        // Función para editar los datos de una mascota
+        function editarMascota(index, docId) {
+    const nombre = prompt("Modificar nombre:");
+    const edad = prompt("Modificar edad:");
+    const tipo = prompt("Modificar tipo de mascota:");
+
+    if (nombre && edad && tipo) {
+        // Actualizar en Firebase
+        const mascotaRef = db.collection("turnos").doc(docId);
+
+        mascotaRef.get().then((doc) => {
+            if (doc.exists) {
+                const mascotas = doc.data().mascotas;
+                mascotas[index - 1] = { nombre, edad, tipo }; // Actualizar los datos de la mascota
+
+                mascotaRef.update({ mascotas })
+                .then(() => {
+                    console.log("Mascota actualizada en Firebase");
+
+                    // Actualizar tarjeta en la interfaz
+                    const tarjeta = document.querySelector(`#tarjetas-mascotas .card:nth-child(${index}) .card-body`);
+                    tarjeta.innerHTML = `
+                        <h5 class="card-title">Mascota ${index}</h5>
+                        <p><strong>Nombre:</strong> ${nombre}</p>
+                        <p><strong>Edad:</strong> ${edad} años</p>
+                        <p><strong>Tipo:</strong> ${tipo}</p>
+                        <button class="btn btn-primary" onclick="editarMascota(${index}, '${docId}')">Editar</button>
+                    `;
+                })
+                .catch((error) => {
+                    console.error("Error actualizando la mascota en Firebase: ", error);
+                    alert("Error al actualizar los datos. Intenta nuevamente.");
+                });
+            }
+        }).catch((error) => {
+            console.log("Error obteniendo el documento: ", error);
+        });
+    }
+}
+
+
+    </script>
+</body>
+</html>

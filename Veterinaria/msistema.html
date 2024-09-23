@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema Veterinaria - Los Cachorros</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <!-- Enlace a Bootstrap -->
+  </head>
+  <body>
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Veterinaria Los Cachorros</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="gestion_turnos.html">Gestión de Turnos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#historial">Historial de Mascotas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#medicamentos">Venta de Medicamentos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#accesorios">Accesorios</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#cerrar-sesion" id="logoutButton"
+              >Cerrar Sesión</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Sección de bienvenida -->
+    <header class="text-center mt-4">
+      <h1>Bienvenido al sistema de la Veterinaria Los Cachorros</h1>
+      <p>Elige una opción del menú para comenzar a gestionar tu veterinaria.</p>
+    </header>
+
+    <!-- Secciones del sistema -->
+    <div class="container mt-4">
+      <section id="turnos" class="mb-4">
+        <h2>Gestión de Turnos</h2>
+        <p>
+          Gestiona los turnos de tus clientes de manera organizada y eficiente.
+        </p>
+      </section>
+
+      <section id="historial" class="mb-4">
+        <h2>Historial de Mascotas</h2>
+        <p>
+          Consulta el historial médico y de consultas de las mascotas de tus
+          clientes.
+        </p>
+      </section>
+
+      <section id="medicamentos" class="mb-4">
+        <h2>Venta de Medicamentos</h2>
+        <p>
+          Gestiona la venta de medicamentos y aplica descuentos según las
+          políticas de la veterinaria.
+        </p>
+      </section>
+
+      <section id="accesorios" class="mb-4">
+        <h2>Accesorios</h2>
+        <p>
+          Gestiona la venta de accesorios y el sistema de puntos canjeables por
+          tus clientes.
+        </p>
+      </section>
+    </div>
+
+    <!-- Pie de página -->
+    <footer class="text-center mt-4">
+      <p>
+        Veterinaria Los Cachorros &copy; 2024 - Todos los derechos reservados
+      </p>
+    </footer>
+
+    <!-- Scripts de Bootstrap y jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+      // Función para cerrar sesión
+      document
+        .getElementById("logoutButton")
+        .addEventListener("click", function () {
+          // Aquí puedes agregar la lógica para cerrar sesión
+          // Por ejemplo, eliminar la sesión y redirigir al inicio de sesión
+          alert("Sesión cerrada exitosamente.");
+          window.location.href = "index.html"; // Redirigir a la página de inicio de sesión
+        });
+    </script>
+  </body>
+</html>

@@ -11,9 +11,9 @@
     <div class="container" id="loginContainer"> <!-- Contenedor para el formulario de inicio de sesión -->
         <h2>Iniciar Sesión</h2>
         <label for="email">Email:</label>
-        <input id="email" type="email" placeholder="Ingresa email" required>
+        <input id="email" type="email" placeholder="Ingresa email" aria-label="Email" required>
         <label for="password">Contraseña:</label>
-        <input id="password" type="password" placeholder="Ingrese contraseña" required>
+        <input id="password" type="password" placeholder="Ingrese contraseña" aria-label="Contraseña" required>
         <button id="loginButton">Iniciar Sesión</button>
         <div class="container2"></div>
         <button id="switchToRegisterButton">¿No tienes cuenta? Regístrate</button>
@@ -23,13 +23,12 @@
     <div class="container" id="registerContainer" style="display: none;"> <!-- Contenedor para el formulario de registro -->
         <h2>Registrar Datos</h2>
         <label for="registerEmail">Email:</label>
-        <input id="registerEmail" type="email" placeholder="Ingresa email" required>
+        <input id="registerEmail" type="email" placeholder="Ingresa email" aria-label="Email de Registro" required>
         <label for="registerPassword">Contraseña:</label>
-        <input id="registerPassword" type="password" placeholder="Ingrese contraseña" required>
+        <input id="registerPassword" type="password" placeholder="Ingrese contraseña" aria-label="Contraseña de Registro" required>
         <button id="registerButton">Registrar</button>
         <div id="registerErrorMessage" class="error-message"></div>
         <button id="switchToLoginButton">¿Ya tienes cuenta? Inicia Sesión</button>
     </div>
-    
 </body>
 </html>

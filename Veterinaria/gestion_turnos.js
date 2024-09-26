@@ -24,19 +24,18 @@ document.addEventListener('DOMContentLoaded', function() {
     if (turnosForm) {
         turnosForm.addEventListener("submit", async (event) => {
             event.preventDefault();
-        
-            const user = auth.currentUser;
-if (!user) {
-    alert("Debes iniciar sesión para guardar un turno.");
-    return;
-}
 
-        
+            const user = auth.currentUser;
+            if (!user) {
+                alert("Debes iniciar sesión para guardar un turno.");
+                return;
+            }
+
             const nombrePersona = document.getElementById("nombrePersona").value;
             const nombrePerro = document.getElementById("nombrePerro").value;
             const fechaConsulta = document.getElementById("fechaConsulta").value;
             const cantidadMascotas = document.getElementById("cantidadMascotas").value;
-        
+
             try {
                 const docRef = await addDoc(collection(db, "turnos"), {
                     nombrePersona,
@@ -45,13 +44,15 @@ if (!user) {
                     cantidadMascotas: Number(cantidadMascotas),
                     userId: user.uid
                 });
+
                 console.log("Documento escrito con ID: ", docRef.id);
                 alert("Turno guardado exitosamente!");
-                turnosForm.reset();
-                document.getElementById('tarjetas-mascotas').innerHTML = '';
-                
-                // Generar tarjetas aquí después de guardar en Firebase
-                generarTarjetas(); // Llama a la función para generar tarjetas después de guardar
+
+                // Aquí ya no llamamos a generarTarjetas() porque las tarjetas ya fueron generadas en el formulario
+                turnosForm.reset(); // Limpiar el formulario
+                document.getElementById('formularios-mascotas').innerHTML = ''; // Limpiar los formularios de mascotas
+                document.getElementById('tarjetas-mascotas').innerHTML = ''; // Limpiar las tarjetas previas
+
             } catch (e) {
                 console.error("Error al agregar el documento: ", e.message);
                 alert("Error al guardar el turno. Por favor, intenta de nuevo.");
@@ -59,7 +60,6 @@ if (!user) {
         });
     }
 });
-
 
 
 // Verificar el estado de autenticación cuando se carga la página

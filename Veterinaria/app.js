@@ -17,19 +17,41 @@ const firebaseConfig = {
   measurementId: "G-WVV154Z5KN",
 };
 
-// Inicialización de Firebase y funciones de registro y login (sin cambios)
+// Inicialización de Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+
+// Funciones de validación
+function validarEmail(email) {
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailPattern.test(email);
+}
+
+function validarPassword(password) {
+  return password.length >= 6; // Firebase requiere mínimo 6 caracteres
+}
 
 // Función para registrar un nuevo usuario
 function registrar() {
   const email = document.getElementById("registerEmail").value;
   const password = document.getElementById("registerPassword").value;
 
+  // Validar el email y la contraseña antes de registrar
+  if (!validarEmail(email)) {
+    showRegisterErrorMessage("Por favor, ingresa un email válido.");
+    return;
+  }
+
+  if (!validarPassword(password)) {
+    showRegisterErrorMessage("La contraseña debe tener al menos 6 caracteres.");
+    return;
+  }
+
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       console.log("Usuario registrado:", userCredential.user);
       clearRegisterErrorMessage();
+      limpiarCamposRegistro();
       switchToLogin(); // Volver a la pantalla de inicio de sesión
     })
     .catch((error) => {
@@ -42,39 +64,50 @@ function iniciarSesion() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
+  // Validar el email antes de iniciar sesión
+  if (!validarEmail(email)) {
+    showErrorMessage("Por favor, ingresa un email válido.");
+    return;
+  }
+
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      // Usuario ha iniciado sesión exitosamente
       const user = userCredential.user;
       console.log("Usuario inició sesión:", user);
-      clearErrorMessage(); // Limpiar mensaje de error si el inicio es exitoso
+      clearErrorMessage();
+      limpiarCamposLogin();
 
       // Redirigir a la página msistema.html
       window.location.href = "msistema.html";
     })
     .catch((error) => {
       const errorCode = error.code;
-      const errorMessage = error.message;
-
-      // Si el código de error es 'auth/user-not-found', mostrar el mensaje personalizado
-      if (errorCode === "auth/user-not-found") {
-        showErrorMessage("No estás registrado. Por favor, regístrate.");
-        switchToRegister(); // Cambiar a la pantalla de registro
-      } else {
-        // Para otros errores, mostrar el mensaje general
-        showErrorMessage(errorMessage);
-      }
-
-      console.error(
-        "Error durante el inicio de sesión:",
-        errorCode,
-        errorMessage
-      );
+      const errorMessage = handleError(errorCode);
+      showErrorMessage(errorMessage);
     });
 }
 
+// Manejo de errores
+function handleError(errorCode) {
+  switch (errorCode) {
+    case "auth/invalid-email":
+      return "El email ingresado no es válido.";
+    case "auth/user-not-found":
+      return "No estás registrado. Por favor, regístrate.";
+    case "auth/wrong-password":
+      return "Contraseña incorrecta.";
+    default:
+      return "Ocurrió un error. Inténtalo de nuevo.";
+  }
+}
+
+// Limpieza de mensajes de error
 function clearErrorMessage() {
   document.getElementById("errorMessage").textContent = "";
+}
+
+function showErrorMessage(message) {
+  document.getElementById("errorMessage").textContent = message;
 }
 
 function showRegisterErrorMessage(message) {
@@ -83,6 +116,17 @@ function showRegisterErrorMessage(message) {
 
 function clearRegisterErrorMessage() {
   document.getElementById("registerErrorMessage").textContent = "";
+}
+
+// Limpiar campos de entrada
+function limpiarCamposRegistro() {
+  document.getElementById("registerEmail").value = "";
+  document.getElementById("registerPassword").value = "";
+}
+
+function limpiarCamposLogin() {
+  document.getElementById("email").value = "";
+  document.getElementById("password").value = "";
 }
 
 // Funciones para cambiar entre las pantallas de inicio de sesión y registro

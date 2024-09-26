@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial Clínico de Mascota</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center">Historial Clínico de Mascota</h2>
+        <form id="historialForm" class="needs-validation" novalidate>
+            <!-- Datos del Paciente -->
+            <h3>Datos del Paciente</h3>
+            <div class="form-group">
+                <label for="nombreMascota">Nombre del animal:</label>
+                <input type="text" class="form-control" id="nombreMascota" required>
+            </div>
+            <div class="form-group">
+                <label for="especieRaza">Especie y raza:</label>
+                <input type="text" class="form-control" id="especieRaza" required>
+            </div>
+            <div class="form-group">
+                <label for="sexoEdad">Sexo y edad:</label>
+                <input type="text" class="form-control" id="sexoEdad" required>
+            </div>
+            <div class="form-group">
+                <label for="pesoTamaño">Peso y tamaño:</label>
+                <input type="text" class="form-control" id="pesoTamaño" required>
+            </div>
+            <div class="form-group">
+                <label for="identificacion">Identificación (microchip, si aplica):</label>
+                <input type="text" class="form-control" id="identificacion">
+            </div>
+
+            <!-- Datos del Propietario -->
+            <h3>Datos del Propietario</h3>
+            <div class="form-group">
+                <label for="nombrePropietario">Nombre completo:</label>
+                <input type="text" class="form-control" id="nombrePropietario" required>
+            </div>
+            <div class="form-group">
+                <label for="contactoPropietario">Información de contacto:</label>
+                <input type="text" class="form-control" id="contactoPropietario" required>
+            </div>
+            <div class="form-group">
+                <label for="relacionPropietario">Relación con el animal:</label>
+                <input type="text" class="form-control" id="relacionPropietario" required>
+            </div>
+
+            <!-- Anamnesis (Historia Clínica) -->
+            <h3>Anamnesis (Historia Clínica)</h3>
+            <div class="form-group">
+                <label for="motivoConsulta">Motivo de consulta:</label>
+                <textarea class="form-control" id="motivoConsulta" rows="2" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="historiaMedica">Historia médica pasada:</label>
+                <textarea class="form-control" id="historiaMedica" rows="2"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="historialMedicacion">Historial de medicación:</label>
+                <textarea class="form-control" id="historialMedicacion" rows="2"></textarea>
+            </div>
+
+            <!-- Examen Físico -->
+            <h3>Examen Físico</h3>
+            <div class="form-group">
+                <label for="examenFisico">Resultados del examen físico:</label>
+                <textarea class="form-control" id="examenFisico" rows="3" required></textarea>
+            </div>
+
+            <!-- Diagnóstico -->
+            <h3>Diagnóstico</h3>
+            <div class="form-group">
+                <label for="diagnosticoPresuntivo">Diagnóstico presuntivo:</label>
+                <input type="text" class="form-control" id="diagnosticoPresuntivo" required>
+            </div>
+            <div class="form-group">
+                <label for="diagnosticosDiferenciales">Diagnósticos diferenciales:</label>
+                <textarea class="form-control" id="diagnosticosDiferenciales" rows="2"></textarea>
+            </div>
+
+            <!-- Tratamiento y Pronóstico -->
+            <h3>Tratamiento y Pronóstico</h3>
+            <div class="form-group">
+                <label for="planTratamiento">Plan de tratamiento:</label>
+                <textarea class="form-control" id="planTratamiento" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="pronostico">Pronóstico:</label>
+                <textarea class="form-control" id="pronostico" rows="2"></textarea>
+            </div>
+
+            <!-- Seguimiento -->
+            <h3>Seguimiento</h3>
+            <div class="form-group">
+                <label for="seguimiento">Notas sobre seguimiento:</label>
+                <textarea class="form-control" id="seguimiento" rows="3"></textarea>
+            </div>
+
+            <!-- Documentación Legal -->
+            <h3>Documentación Legal</h3>
+            <div class="form-group">
+                <label for="registroFechas">Registro de fechas y horas de atención:</label>
+                <textarea class="form-control" id="registroFechas" rows="2" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="veterinarioAtencion">Datos del personal veterinario:</label>
+                <input type="text" class="form-control" id="veterinarioAtencion" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Guardar Historial</button>
+            <button
+          type="button"
+          class="btn btn-secondary btn-block mt-2"
+          onclick="window.history.back();"
+        >
+          Volver
+        </button>
+        </form>
+
+        <h3 class="mt-5">Historial Clínico Guardado</h3>
+        <div id="historialGuardado">
+            <!-- Aquí se mostrarán los datos del historial clínico -->
+        </div>
+    </div>
+
+    <script type="module" src="historial_mascota.js"></script>
+</body>
+</html>

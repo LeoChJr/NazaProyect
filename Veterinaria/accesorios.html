@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Accesorios para Mascotas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 300px;
+            margin: 15px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .card h2 {
+            font-size: 18px;
+            color: #333;
+        }
+        .card p {
+            color: #666;
+        }
+        .price {
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        .btn-buy {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .btn-buy:hover {
+            background-color: #45a049;
+        }
+        .btn-back {
+            display: block;
+            margin: 20px auto; /* Centra el botón */
+            padding: 10px 15px;
+            background-color: #f44336; /* Color rojo */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            width: 150px; /* Ancho fijo */
+        }
+        .btn-back:hover {
+            background-color: #e53935; /* Color rojo más oscuro al pasar el mouse */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Catálogo de Accesorios para Mascotas</h1>
+
+    <div class="container">
+        <div class="card">
+            <img src="https://via.placeholder.com/300x200" alt="Comedero de acero inoxidable">
+            <h2>Comedero de acero inoxidable</h2>
+            <p>Resistente y fácil de limpiar.</p>
+            <p class="price">$9,070 - $13,910</p>
+            <a href="#" class="btn-buy">Comprar</a>
+        </div>
+
+        <div class="card">
+            <img src="https://via.placeholder.com/300x200" alt="Collar ajustable">
+            <h2>Collar ajustable</h2>
+            <p>Disponible en varios colores y tamaños.</p>
+            <p class="price">$6,500 - $11,600</p>
+            <a href="#" class="btn-buy">Comprar</a>
+        </div>
+
+        <div class="card">
+            <img src="https://via.placeholder.com/300x200" alt="Correa de nylon">
+            <h2>Correa de nylon</h2>
+            <p>Resistente y cómoda para paseos.</p>
+            <p class="price">$12,830 - $17,790</p>
+            <a href="#" class="btn-buy">Comprar</a>
+        </div>
+
+        <div class="card">
+            <img src="https://via.placeholder.com/300x200" alt="Transportadora para gatos">
+            <h2>Transportadora para gatos</h2>
+            <p>Ideal para viajes y visitas al veterinario.</p>
+            <p class="price">$20,160 - $24,000</p>
+             <a href="#" class="btn-buy">Comprar</a>
+          </div>
+
+          <div class="card">
+           <img src="https://via.placeholder.com/300x200" alt="Juguete interactivo">
+           <h2>Juguete interactivo</h2>
+           <p>Estimula mentalmente a la mascota.</p>
+           <p class="price">$9,230 - $16,630</p>
+           <a href="#" class="btn-buy">Comprar</a>
+        </div>
+
+        <div class="card">
+           <img src="https://via.placeholder.com/300x200" alt="Cama ortopédica">
+           <h2>Cama ortopédica</h2>
+           <p>Proporciona comodidad y soporte para mascotas mayores.</p>
+           <p class="price">$15,080</p>
+           <a href="#" class="btn-buy">Comprar</a>
+        </div>
+
+        <div class="card">
+           <img src="https://via.placeholder.com/300x200" alt="Bozal ajustable">
+           <h2>Bozal ajustable</h2>
+           <p>Para controlar a la mascota durante paseos.</p>
+           <p class="price">$18,900</p>
+           <a href="#" class="btn-buy">Comprar</a>
+        </div>
+
+        <div class="card">
+           <img src="https://via.placeholder.com/300x200" alt="Rascador para gatos">
+           <h2>Rascador para gatos</h2>
+           <p>Satisface el instinto natural de rasguñar.</p>
+           <p class="price">$9,070 - $13,910</p>
+             <a href="#" class="btn-buy">Comprar</a>
+        </div>
+
+        <div class="card">
+           <img src="https://via.placeholder.com/300x200" alt="Dispensador automático de comida">
+           <h2>Dispensador automático de comida</h2>
+           <p>Facilita la alimentación regular.</p>
+           <p class="price">$6,500 - $11,600</p>
+           <a href="#" class="btn-buy">Comprar</a>
+        </div>
+
+        <div class="card">
+           <img src="https://via.placeholder.com/300x200" alt="Placa identificativa">
+           <h2>Placa identificativa</h2>
+           <p>Personalizable con el nombre y datos del propietario.</p>
+           <p class="price">Desde $1,000</p>
+           <a href="#" class="btn-buy">Comprar</a>
+        </div>
+
+    </div>
+
+    <!-- Botón Volver -->
+  
+    <button
+          type="button"
+          class="btn-back"
+          onclick="window.history.back();"
+        >
+          Volver
+        </button>
+
+</body>
+</html>

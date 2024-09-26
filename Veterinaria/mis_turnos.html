@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Turnos</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Mis Turnos Reservados</h1>
+        <div id="turnosContainer" class="mt-4">
+            <!-- Aquí se mostrará la lista de turnos -->
+        </div>
+        <button class="btn btn-primary btn-block mt-4" onclick="window.location.href='msistema.html';">Volver al Sistema</button>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+        import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyC13egxtMiC_611gyNexGAMScfc9YvX9Ow",
+            authDomain: "proyecto-905c6.firebaseapp.com",
+            projectId: "proyecto-905c6",
+            storageBucket: "proyecto-905c6.appspot.com",
+            messagingSenderId: "767681703235",
+            appId: "1:767681703235:web:228915f2dc7385bde9d3f6",
+            measurementId: "G-WVV154Z5KN"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        // Verificar si el usuario está autenticado
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const userId = user.uid;
+                const turnosContainer = document.getElementById("turnosContainer");
+
+                // Consultar los turnos guardados por el usuario
+                const q = query(collection(db, "turnos"), where("userId", "==", userId));
+                const querySnapshot = await getDocs(q);
+
+                if (!querySnapshot.empty) {
+                    querySnapshot.forEach((doc) => {
+                        const turno = doc.data();
+                        // Generar HTML para mostrar cada turno
+                        const turnoHtml = `
+    <div class="card mt-3">
+        <div class="card-body">
+            <h5 class="card-title">Turno reservado para: ${turno.nombrePersona}</h5>
+            <p class="card-text"><strong>Email:</strong> ${turno.email}</p>
+            <p class="card-text"><strong>Teléfono:</strong> ${turno.telefono}</p>
+            <p class="card-text"><strong>Domicilio:</strong> ${turno.domicilio}</p>
+            <p class="card-text"><strong>Fecha de consulta:</strong> ${turno.fechaConsulta}</p>  <!-- Mostrar la fecha -->
+            <p class="card-text"><strong>Mascotas registradas:</strong></p>
+            <ul>
+                ${turno.mascotas.map(mascota => `<li>${mascota.nombre} - ${mascota.raza} (${mascota.motivo})</li>`).join('')}
+            </ul>
+        </div>
+    </div>
+`;
+
+                        turnosContainer.innerHTML += turnoHtml;
+                    });
+                } else {
+                    turnosContainer.innerHTML = "<p>No tienes turnos reservados.</p>";
+                }
+            } else {
+                // Si el usuario no está autenticado, redirigir a la página de inicio de sesión
+                window.location.href = "index.html";
+            }
+        });
+    </script>
+</body>
+</html>

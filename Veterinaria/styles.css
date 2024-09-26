@@ -1,66 +1,66 @@
 /* Estilos generales del cuerpo */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
 }
 
 /* Contenedor del formulario */
 .container {
-    background-color: white;
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
+  background-color: white;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
 }
-.container2{
-    padding: 10px;
+.container2 {
+  padding: 10px;
 }
 /* Estilo de los campos de entrada */
 input[type="email"],
 input[type="password"] {
-    width: 95%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  width: 95%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 /* Estilo del botón */
 button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff; /* Color azul */
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff; /* Color azul */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 /* Efecto al pasar el mouse sobre el botón */
 button:hover {
-    background-color: #0056b3; /* Azul más oscuro */
+  background-color: #0056b3; /* Azul más oscuro */
 }
 
 /* Estilo del texto del botón */
 button:focus {
-    outline: none; /* Eliminar el borde de enfoque */
+  outline: none; /* Eliminar el borde de enfoque */
 }
 /* Estilo del botón de inicio de sesión */
 #loginButton {
-    background-color: #28a745; /* Color verde */
+  background-color: #28a745; /* Color verde */
 }
 
 #loginButton:hover {
-    background-color: #218838; /* Verde más oscuro */
+  background-color: #218838; /* Verde más oscuro */
 }
 /* Estilo del mensaje de error */
 .error-message {
-    color: red; /* Color rojo para el mensaje de error */
-    margin-top: 10px;
-    font-size: 14px;
+  color: red; /* Color rojo para el mensaje de error */
+  margin-top: 10px;
+  font-size: 14px;
 }

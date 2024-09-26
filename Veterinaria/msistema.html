@@ -1,115 +1,155 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sistema Veterinaria - Los Cachorros</title>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    />
-    <!-- Enlace a Bootstrap -->
-  </head>
-  <body>
-    <!-- Barra de navegación -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Veterinaria Los Cachorros</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="gestion_turnos.html">Gestión de Turnos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#historial">Historial de Mascotas</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#medicamentos">Venta de Medicamentos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#accesorios">Accesorios</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#cerrar-sesion" id="logoutButton"
-              >Cerrar Sesión</a
-            >
-          </li>
-        </ul>
-      </div>
-    </nav>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Medicamentos para Mascotas</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Puedes vincular un archivo CSS externo si lo deseas -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 300px;
+            margin: 15px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .card h2 {
+            font-size: 18px;
+            color: #333;
+        }
+        .card p {
+            color: #666;
+        }
+        .price {
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        .btn-buy {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .btn-buy:hover {
+            background-color: #45a049;
+        }
+        .btn-back {
+            display: block;
+            margin: 20px auto; /* Centra el botón */
+            padding: 10px 15px;
+            background-color: #f44336; /* Color rojo */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            width: 150px; /* Ancho fijo */
+        }
+        .btn-back:hover {
+            background-color: #e53935; /* Color rojo más oscuro al pasar el mouse */
+        }
+    </style>
+</head>
+<body>
 
-    <!-- Sección de bienvenida -->
-    <header class="text-center mt-4">
-      <h1>Bienvenido al sistema de la Veterinaria Los Cachorros</h1>
-      <p>Elige una opción del menú para comenzar a gestionar tu veterinaria.</p>
-    </header>
+    <h1>Catálogo de Medicamentos para Mascotas</h1>
 
-    <!-- Secciones del sistema -->
-    <div class="container mt-4">
-      <section id="turnos" class="mb-4">
-        <h2>Gestión de Turnos</h2>
-        <p>
-          Gestiona los turnos de tus clientes de manera organizada y eficiente.
-        </p>
-      </section>
+    <div class="container">
+        <div class="card">
+            <img src="https://via.placeholder.com/300x200" alt="Antiparasitario">
+            <h2>Antiparasitario</h2>
+            <p>Previene y trata infestaciones por parásitos.</p>
+            <p class="price">$500</p>
+            <a href="#" class="btn-buy">Comprar</a>
+        </div>
 
-      <section id="historial" class="mb-4">
-        <h2>Historial de Mascotas</h2>
-        <p>
-          Consulta el historial médico y de consultas de las mascotas de tus
-          clientes.
-        </p>
-      </section>
+        <div class="card">
+            <img src="https://via.placeholder.com/300x200" alt="Antibiótico">
+            <h2>Antibiótico</h2>
+            <p>Tratamiento para infecciones bacterianas.</p>
+            <p class="price">$750</p>
+             <a href="#" class="btn-buy">Comprar</a>
+          </div>
 
-      <section id="medicamentos" class="mb-4">
-        <h2>Venta de Medicamentos</h2>
-        <p>
-          Gestiona la venta de medicamentos y aplica descuentos según las
-          políticas de la veterinaria.
-        </p>
-      </section>
+          <div class="card">
+           <img src="https://via.placeholder.com/300x200" alt="Analgesico">
+           <h2>Analgesico</h2>
+           <p>Alivia el dolor en mascotas.</p>
+           <p class="price">$600</p>
+           <a href="#" class="btn-buy">Comprar</a>
+        </div>
 
-      <section id="accesorios" class="mb-4">
-        <h2>Accesorios</h2>
-        <p>
-          Gestiona la venta de accesorios y el sistema de puntos canjeables por
-          tus clientes.
-        </p>
-      </section>
+        <div class="card">
+           <img src="https://via.placeholder.com/300x200" alt="Vacuna contra la rabia">
+           <h2>Vacuna contra la rabia</h2>
+           <p>Previene la rabia en mascotas.</p>
+           <p class="price">$1,200</p>
+           <a href="#" class="btn-buy">Comprar</a>
+        </div>
+
+        <div class="card">
+           <img src="https://via.placeholder.com/300x200" alt="Suplemento vitamínico">
+           <h2>Suplemento vitamínico</h2>
+           <p>Mejora la salud general y el bienestar.</p>
+           <p class="price">$400</p>
+           <a href="#" class="btn-buy">Comprar</a>
+        </div>
+
+        <div class="card">
+           <img src="https://via.placeholder.com/300x200" alt="Medicamento para alergias">
+           <h2>Medicamento para alergias</h2>
+           <p>Alivia síntomas de alergias en mascotas.</p>
+           <p class="price">$550</p>
+           <a href="#" class="btn-buy">Comprar</a>
+        </div>
+
+        <div class="card">
+           <img src="https://via.placeholder.com/300x200" alt="Medicamento para el estómago">
+           <h2>Medicamento para el estómago</h2>
+           <p>Ayuda a tratar problemas gastrointestinales.</p>
+           <p class="price">$650</p>
+           <a href="#" class="btn-buy">Comprar</a>
+        </div>
+
+        <div class="card">
+           <img src="https://via.placeholder.com/300x200" alt="Antiinflamatorio">
+           <h2>Antiinflamatorio</h2>
+           <p>Reduce la inflamación y el dolor.</p>
+           <p class="price">$700</p>
+           <a href="#" class="btn-buy">Comprar</a>
+        </div>
+
+        
     </div>
 
-    <!-- Pie de página -->
-    <footer class="text-center mt-4">
-      <p>
-        Veterinaria Los Cachorros &copy; 2024 - Todos los derechos reservados
-      </p>
-    </footer>
+    <!-- Botón Volver -->
+    <a href="sistema.html" class="btn-back">Volver</a>
 
-    <!-- Scripts de Bootstrap y jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <script>
-      // Función para cerrar sesión
-      document
-        .getElementById("logoutButton")
-        .addEventListener("click", function () {
-          // Aquí puedes agregar la lógica para cerrar sesión
-          // Por ejemplo, eliminar la sesión y redirigir al inicio de sesión
-          alert("Sesión cerrada exitosamente.");
-          window.location.href = "index.html"; // Redirigir a la página de inicio de sesión
-        });
-    </script>
-  </body>
+    <script src="medicamentos.js"></script> <!-- Vincula el archivo JavaScript -->
+    
+</body>
 </html>

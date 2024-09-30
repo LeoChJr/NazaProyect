@@ -54,11 +54,22 @@
           <input type="text" class="form-control" id="domicilio" required />
           <div class="invalid-feedback">Por favor, ingresa el domicilio.</div>
         </div>
+
+        <!-- Campo para seleccionar la fecha -->
         <div class="form-group">
           <label for="fechaConsulta">Fecha de Consulta:</label>
           <input type="date" class="form-control" id="fechaConsulta" required />
           <div class="invalid-feedback">
             Por favor, selecciona una fecha válida.
+          </div>
+        </div>
+
+        <!-- Campo para seleccionar la hora -->
+        <div class="form-group">
+          <label for="horaConsulta">Hora de Consulta:</label>
+          <input type="time" class="form-control" id="horaConsulta" required />
+          <div class="invalid-feedback">
+            Por favor, selecciona una hora válida.
           </div>
         </div>
 
@@ -195,11 +206,13 @@
 
           // Obtener los valores del formulario
           const nombrePersona = document.getElementById("nombrePersona").value;
-          const email = document.getElementById("email").value;
+          const email = document.getElementById("email").value
+
           const telefono = document.getElementById("telefono").value;
           const dni = document.getElementById("dni").value;
           const domicilio = document.getElementById("domicilio").value;
           const fechaConsulta = document.getElementById("fechaConsulta").value; // Capturar la fecha de consulta
+          const horaConsulta = document.getElementById("horaConsulta").value;   // Capturar la hora de consulta
 
           const mascotas = [];
           for (let i = 1; i <= cantidadMascotasAgregadas; i++) {
@@ -221,7 +234,8 @@
               telefono,
               dni,
               domicilio,
-              fechaConsulta, // Guardar la fecha de consulta
+              fechaConsulta,  // Guardar la fecha de consulta
+              horaConsulta,   // Guardar la hora de consulta
               mascotas,
               userId: user.uid,
             });

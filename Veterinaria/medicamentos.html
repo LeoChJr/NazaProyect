@@ -1,166 +1,154 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo de Medicamentos para Mascotas</title>
-    <link rel="stylesheet" href="styles.css" />
-    <!-- Puedes vincular un archivo CSS externo si lo deseas -->
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-        background-color: #f9f9f9;
-      }
-      h1 {
-        text-align: center;
-        color: #4caf50;
-      }
-      .container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-      }
-      .card {
-        background-color: white;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        width: 300px;
-        margin: 15px;
-        padding: 15px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      }
-      .card img {
-        width: 100%;
-        height: auto;
-        border-radius: 5px;
-      }
-      .card h2 {
-        font-size: 18px;
-        color: #333;
-      }
-      .card p {
-        color: #666;
-      }
-      .price {
-        font-weight: bold;
-        color: #4caf50;
-      }
-      .btn-buy {
-        display: inline-block;
-        margin-top: 10px;
-        padding: 10px 15px;
-        background-color: #4caf50;
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-        text-align: center;
-      }
-      .btn-buy:hover {
-        background-color: #45a049;
-      }
-      .btn-back {
-        display: block;
-        margin: 20px auto; /* Centra el botón */
-        padding: 10px 15px;
-        background-color: #f44336; /* Color rojo */
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-        text-align: center;
-        width: 150px; /* Ancho fijo */
-      }
-      .btn-back:hover {
-        background-color: #e53935; /* Color rojo más oscuro al pasar el mouse */
-      }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 300px;
+            margin: 15px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .card h2 {
+            font-size: 18px;
+            color: #333;
+        }
+        .card p {
+            color: #666;
+        }
+        .price {
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        .btn-buy, .btn-edit, .btn-delete {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #4CAF50; /* Color verde */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .btn-buy:hover, .btn-edit:hover, .btn-delete:hover {
+            background-color: #45a049; /* Color verde más oscuro */
+        }
+        .btn-back {
+            display: block;
+            margin: 20px auto; /* Centra el botón */
+            padding: 10px 15px;
+            background-color: #f44336; /* Color rojo */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            width: 150px; /* Ancho fijo */
+        }
+        .btn-back:hover {
+            background-color: #e53935; /* Color rojo más oscuro al pasar el mouse */
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
+
     <h1>Catálogo de Medicamentos para Mascotas</h1>
 
     <div class="container">
-      <div class="card">
-        <img src="https://via.placeholder.com/300x200" alt="Antiparasitario" />
-        <h2>Antiparasitario</h2>
-        <p>Previene y trata infestaciones por parásitos.</p>
-        <p class="price">$500</p>
-        <a href="#" class="btn-buy">Comprar</a>
-      </div>
+        <div class="card">
+            <img src="https://via.placeholder.com/300x200" alt="Antiparasitario">
+            <h2>Antiparasitario</h2>
+            <p>Previene y trata infestaciones por parásitos.</p>
+            <p class="price">$500 - $700</p>
+            <a href="#" class="btn-buy">Comprar</a>
+        </div>
 
-      <div class="card">
-        <img src="https://via.placeholder.com/300x200" alt="Antibiótico" />
-        <h2>Antibiótico</h2>
-        <p>Tratamiento para infecciones bacterianas.</p>
-        <p class="price">$750</p>
-        <a href="#" class="btn-buy">Comprar</a>
-      </div>
+        <div class="card">
+            <img src="https://via.placeholder.com/300x200" alt="Antibiótico">
+            <h2>Antibiótico</h2>
+            <p>Tratamiento para infecciones bacterianas.</p>
+            <p class="price">$750 - $900</p>
+            <a href="#" class="btn-buy">Comprar</a>
+        </div>
 
-      <div class="card">
-        <img src="https://via.placeholder.com/300x200" alt="Analgesico" />
-        <h2>Analgesico</h2>
-        <p>Alivia el dolor en mascotas.</p>
-        <p class="price">$600</p>
-        <a href="#" class="btn-buy">Comprar</a>
-      </div>
+        <div class="card">
+            <img src="https://via.placeholder.com/300x200" alt="Analgesico">
+            <h2>Analgesico</h2>
+            <p>Alivia el dolor en mascotas.</p>
+            <p class="price">$600 - $800</p>
+            <a href="#" class="btn-buy">Comprar</a>
+        </div>
 
-      <div class="card">
-        <img
-          src="https://via.placeholder.com/300x200"
-          alt="Vacuna contra la rabia"
-        />
-        <h2>Vacuna contra la rabia</h2>
-        <p>Previene la rabia en mascotas.</p>
-        <p class="price">$1,200</p>
-        <a href="#" class="btn-buy">Comprar</a>
-      </div>
+        <div class="card">
+           <img src="https://via.placeholder.com/300x200" alt="Vacuna contra la rabia">
+           <h2>Vacuna contra la rabia</h2>
+           <p>Previene la rabia en mascotas.</p>
+           <p class="price">$1,200 - $1,500</p>
+           <a href="#" class="btn-buy">Comprar</a>
+       </div>
 
-      <div class="card">
-        <img
-          src="https://via.placeholder.com/300x200"
-          alt="Suplemento vitamínico"
-        />
-        <h2>Suplemento vitamínico</h2>
-        <p>Mejora la salud general y el bienestar.</p>
-        <p class="price">$400</p>
-        <a href="#" class="btn-buy">Comprar</a>
-      </div>
+       <div class="card">
+           <img src="https://via.placeholder.com/300x200" alt="Suplemento vitamínico">
+           <h2>Suplemento vitamínico</h2>
+           <p>Mejora la salud general y el bienestar.</p>
+           <p class="price">$400 - $600</p>
+           <a href="#" class="btn-buy">Comprar</a>
+       </div>
 
-      <div class="card">
-        <img
-          src="https://via.placeholder.com/300x200"
-          alt="Medicamento para alergias"
-        />
-        <h2>Medicamento para alergias</h2>
-        <p>Alivia síntomas de alergias en mascotas.</p>
-        <p class="price">$550</p>
-        <a href="#" class="btn-buy">Comprar</a>
-      </div>
+       <div class="card">
+           <img src="https://via.placeholder.com/300x200" alt="Medicamento para alergias">
+           <h2>Medicamento para alergias</h2>
+           <p>Alivia síntomas de alergias en mascotas.</p>
+           <p class="price">$550 - $750</p>
+           <a href="#" class="btn-buy">Comprar</a>
+       </div>
 
-      <div class="card">
-        <img
-          src="https://via.placeholder.com/300x200"
-          alt="Medicamento para el estómago"
-        />
-        <h2>Medicamento para el estómago</h2>
-        <p>Ayuda a tratar problemas gastrointestinales.</p>
-        <p class="price">$650</p>
-        <a href="#" class="btn-buy">Comprar</a>
-      </div>
+       <div class="card">
+           <img src="https://via.placeholder.com/300x200" alt="Medicamento para el estómago">
+           <h2>Medicamento para el estómago</h2>
+           <p>Ayuda a tratar problemas gastrointestinales.</p>
+           <p class="price">$650 - $850</p>
+           <a href="#" class="btn-buy">Comprar</a>
+       </div>
 
-      <div class="card">
-        <img src="https://via.placeholder.com/300x200" alt="Antiinflamatorio" />
-        <h2>Antiinflamatorio</h2>
-        <p>Reduce la inflamación y el dolor.</p>
-        <p class="price">$700</p>
-        <a href="#" class="btn-buy">Comprar</a>
-      </div>
+       <div class="card">
+           <img src="https://via.placeholder.com/300x200" alt="Antiinflamatorio">
+           <h2>Antiinflamatorio</h2>
+           <p>Reduce la inflamación y el dolor.</p>
+           <p class="price">$700 - $900</p>
+           <a href="#" class="btn-buy">Comprar</a>
+       </div>
+
     </div>
 
-    <button type="button" class="btn-back" onclick="window.history.back();">
-      Volver
-    </button>
+   
 
-    <script src="medicamentos.js"></script>
-    <!-- Vincula el archivo JavaScript -->
-  </body>
+    <!-- Botón Volver -->
+    <button type="button" class="btn-back" onclick="window.history.back();">Volver</button>
+     <!-- Tarjeta de Producto Agregado al Carrito -->
+     
+</body>
 </html>

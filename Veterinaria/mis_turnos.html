@@ -1,33 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mis Turnos</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
         }
+
         .container {
             margin-top: 20px;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1 class="text-center">Mis Turnos Reservados</h1>
         <div id="turnosContainer" class="mt-4">
             <!-- Aquí se mostrará la lista de turnos -->
         </div>
-        <button class="btn btn-primary btn-block mt-4" onclick="window.location.href='msistema.html';">Volver al Sistema</button>
+        <button class="btn btn-primary btn-block mt-4" onclick="window.location.href='msistema.html';">
+            Volver al Sistema
+        </button>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
-        import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+        import {
+            getFirestore,
+            collection,
+            query,
+            where,
+            getDocs,
+            doc,
+            updateDoc,
+            deleteDoc
+        } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+        import {
+            getAuth,
+            onAuthStateChanged,
+        } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyC13egxtMiC_611gyNexGAMScfc9YvX9Ow",
@@ -36,7 +53,7 @@
             storageBucket: "proyecto-905c6.appspot.com",
             messagingSenderId: "767681703235",
             appId: "1:767681703235:web:228915f2dc7385bde9d3f6",
-            measurementId: "G-WVV154Z5KN"
+            measurementId: "G-WVV154Z5KN",
         };
 
         const app = initializeApp(firebaseConfig);
@@ -56,23 +73,30 @@
                 if (!querySnapshot.empty) {
                     querySnapshot.forEach((doc) => {
                         const turno = doc.data();
-                        // Generar HTML para mostrar cada turno
-                        const turnoHtml = `
-    <div class="card mt-3">
-        <div class="card-body">
-            <h5 class="card-title">Turno reservado para: ${turno.nombrePersona}</h5>
-            <p class="card-text"><strong>Email:</strong> ${turno.email}</p>
-            <p class="card-text"><strong>Teléfono:</strong> ${turno.telefono}</p>
-            <p class="card-text"><strong>Domicilio:</strong> ${turno.domicilio}</p>
-            <p class="card-text"><strong>Fecha de consulta:</strong> ${turno.fechaConsulta}</p>  <!-- Mostrar la fecha -->
-            <p class="card-text"><strong>Mascotas registradas:</strong></p>
-            <ul>
-                ${turno.mascotas.map(mascota => `<li>${mascota.nombre} - ${mascota.raza} (${mascota.motivo})</li>`).join('')}
-            </ul>
-        </div>
-    </div>
-`;
+                        const turnoId = doc.id;
 
+                        // Generar HTML para mostrar todos los datos del cliente y mascotas en la tarjeta
+                        const turnoHtml = `
+                            <div class="card mt-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Turno reservado para: ${turno.nombrePersona}</h5>
+                                    <p class="card-text"><strong>Email:</strong> ${turno.email}</p>
+                                    <p class="card-text"><strong>Teléfono:</strong> ${turno.telefono}</p>
+                                    <p class="card-text"><strong>DNI:</strong> ${turno.dni}</p>
+                                    <p class="card-text"><strong>Domicilio:</strong> ${turno.domicilio}</p>
+                                    <p class="card-text"><strong>Fecha de consulta:</strong> ${turno.fechaConsulta}</p>
+                                    <p class="card-text"><strong>Hora de consulta:</strong> ${turno.horaConsulta}</p>
+                                    <p class="card-text"><strong>Mascotas registradas:</strong></p>
+                                    <ul>
+                                        ${turno.mascotas
+                                            .map((mascota) => `<li><strong>Nombre:</strong> ${mascota.nombre} - <strong>Raza:</strong> ${mascota.raza} - <strong>Motivo:</strong> ${mascota.motivo}</li>`)
+                                            .join("")}
+                                    </ul>
+                                    <button class="btn btn-warning btn-sm" onclick="editarTurno('${turnoId}', '${turno.nombrePersona}', '${turno.email}', '${turno.telefono}', '${turno.dni}', '${turno.domicilio}', '${turno.fechaConsulta}', '${turno.horaConsulta}')">Editar</button>
+                                    <button class="btn btn-danger btn-sm" onclick="eliminarTurno('${turnoId}')">Eliminar</button>
+                                </div>
+                            </div>
+                        `;
                         turnosContainer.innerHTML += turnoHtml;
                     });
                 } else {
@@ -83,6 +107,55 @@
                 window.location.href = "index.html";
             }
         });
+
+        // Función para editar un turno
+        window.editarTurno = function (turnoId, nombrePersona, email, telefono, dni, domicilio, fechaConsulta, horaConsulta) {
+            // Pedir al usuario que ingrese los nuevos datos
+            const nuevoNombre = prompt("Editar nombre:", nombrePersona) || nombrePersona;
+            const nuevoEmail = prompt("Editar email:", email) || email;
+            const nuevoTelefono = prompt("Editar teléfono:", telefono) || telefono;
+            const nuevoDni = prompt("Editar DNI:", dni) || dni;
+            const nuevoDomicilio = prompt("Editar domicilio:", domicilio) || domicilio;
+            const nuevaFechaConsulta = prompt("Editar fecha de consulta (YYYY-MM-DD):", fechaConsulta) || fechaConsulta;
+            const nuevaHoraConsulta = prompt("Editar hora de consulta (HH:MM):", horaConsulta) || horaConsulta;
+
+            // Actualizar el turno en Firestore
+            const turnoRef = doc(db, "turnos", turnoId);
+            updateDoc(turnoRef, {
+                nombrePersona: nuevoNombre,
+                email: nuevoEmail,
+                telefono: nuevoTelefono,
+                dni: nuevoDni,
+                domicilio: nuevoDomicilio,
+                fechaConsulta: nuevaFechaConsulta,
+                horaConsulta: nuevaHoraConsulta,
+            })
+                .then(() => {
+                    alert("Turno actualizado exitosamente.");
+                    window.location.reload(); // Recargar la página para mostrar los cambios
+                })
+                .catch((error) => {
+                    console.error("Error al actualizar el turno: ", error);
+                });
+        };
+
+        // Función para eliminar un turno
+        window.eliminarTurno = function (turnoId) {
+            const confirmacion = confirm("¿Estás seguro de que deseas eliminar este turno?");
+            if (confirmacion) {
+                // Eliminar el turno de Firestore
+                const turnoRef = doc(db, "turnos", turnoId);
+                deleteDoc(turnoRef)
+                    .then(() => {
+                        alert("Turno eliminado exitosamente.");
+                        window.location.reload(); // Recargar la página para mostrar los cambios
+                    })
+                    .catch((error) => {
+                        console.error("Error al eliminar el turno: ", error);
+                    });
+            }
+        };
     </script>
 </body>
+
 </html>
